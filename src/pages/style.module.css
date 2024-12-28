@@ -1,0 +1,44 @@
+.form {
+    width: 30%;
+    background-color: rgba(255, 255, 255, 1);
+    backdrop-filter: blur(0.1rem);
+    box-shadow: 0 0 0.4rem 0.1rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+.pageLabel {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.error-message {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.userCard {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.4rem 0.2rem rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.card-item {
+    display: flex;
+}
+
+.userPage{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom right, rgba(243, 0, 0, 0.24), rgba(189, 236, 252, 0.75));
+    min-height: calc(100vh - 4rem);
+    min-width: 100vw;
+}

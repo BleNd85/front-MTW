@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.registration-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(100vh - 4rem);
+    background-image: linear-gradient(to bottom right, rgba(243, 0, 0, 0.24), rgba(189, 236, 252, 0.75));
+    min-width: 100vw;
+    flex-wrap: wrap;
+}
+
+.pageLabel {
+    text-align: center;;
+}
+
+.error-message {
+    margin-top: 0.2rem;
+    margin-bottom: 0.4rem;
+}

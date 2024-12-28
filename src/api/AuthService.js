@@ -8,18 +8,18 @@ export default class AuthService {
             const response = await axios.post(`${API_URL}/register`, data);
             return {data: response.data};
         } catch (error) {
-            if (!error.response) return {message: "No server response"};
+            if (!error.response) throw new Error("No server response");
             if (error.response.status === 409) {
-                return {message: error.response.data.detail};
+                throw new Error(error.response.data.detail || "Username is already taken");
             }
             if (error.response.status === 422) {
                 const validationErrors = error.response.data.detail;
                 if (Array.isArray(validationErrors) && validationErrors.length > 0) {
-                    return {message: validationErrors[0].msg || "Validation Error"};
+                    throw new Error(validationErrors[0].msg || "Validation Error");
                 }
-                return {message: "Validation Error"};
+                throw new Error("Validation Error");
             }
-            return {message: error.response.data?.detail || "An error occurred"};
+            throw new Error(error.response.data?.detail || "An error occurred");
         }
     }
 
@@ -36,12 +36,15 @@ export default class AuthService {
             return {data: response.data};
         } catch (error) {
             if (!error.response) return {message: "No server response"};
+            if (error.response.status === 401) {
+                throw new Error("Invalid username or password");
+            }
             if (error.response.status === 422) {
                 const validationErrors = error.response.data.detail;
                 if (Array.isArray(validationErrors) && validationErrors.length > 0) {
-                    return {message: validationErrors[0].msg || "Validation Error"};
+                    throw new Error(validationErrors[0].msg || "Validation Error");
                 }
-                return {message: "Validation Error"};
+                throw new Error("Validation Error");
             }
         }
         return {message: "Login failed"};
