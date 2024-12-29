@@ -30,8 +30,22 @@
     padding: 1.5rem;
 }
 
-.card-item {
+.infoCard{
     display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.4rem 0.2rem rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.cardItem {
+    display: flex;
+    margin: 1rem;
 }
 
 .userPage{

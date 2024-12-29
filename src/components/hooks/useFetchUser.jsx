@@ -3,18 +3,20 @@ import UserService from "../../api/UserService";
 
 export default function useFetchUser() {
     const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
+        setUser(null);
+        setError(null);
+        setIsLoading(true);
         const fetchUser = async () => {
-            const token = localStorage.getItem("token");
             if (!token) {
                 setError("No token found. Please log in.");
                 setIsLoading(false);
                 return;
             }
-
             try {
                 const userData = await UserService.getMe();
                 setUser(userData);
@@ -25,6 +27,6 @@ export default function useFetchUser() {
             }
         };
         fetchUser();
-    }, []);
+    }, [token]);
     return {user, isLoading, error};
 }

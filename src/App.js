@@ -4,6 +4,7 @@ import {AuthContext} from "./context";
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/navbar/Navbar";
+import Loader from "./components/ui/loader/Loader";
 
 function App() {
     const [isAuth, setIsAuth] = useState(false);
@@ -25,7 +26,7 @@ function App() {
             isLoading, setIsLoading,
         }}>
             {isLoading ? (
-                <div>Loading...</div>
+                <div><Loader/></div>
             ) : (
                 <BrowserRouter>
                     <Navbar/>

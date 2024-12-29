@@ -1,11 +1,13 @@
 import {useContext, useState} from "react";
 import AuthService from "../../api/AuthService";
 import {AuthContext} from "../../context";
+import {useNavigate} from "react-router-dom";
 
 export default function useAuth() {
     const {setIsAuth, setToken} = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const login = async (formData) => {
         setIsLoading(true);
@@ -17,6 +19,7 @@ export default function useAuth() {
                 setIsAuth(true);
                 localStorage.setItem("token", token);
                 localStorage.setItem("auth", "true");
+                navigate("/me")
             }
         } catch (error) {
             console.log("Error response:", error.response);
