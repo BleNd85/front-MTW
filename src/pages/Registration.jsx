@@ -4,8 +4,10 @@ import FormInput from "../components/ui/input/FormInput";
 import InputButton from "../components/ui/button/InputButton";
 import useRegister from "../components/hooks/useRegister";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function RegistrationForm() {
+    const navigate = useNavigate();
     const {register, isLoading, error} = useRegister();
     const [formData, setFormData] = useState({
         firstName: "",
@@ -71,7 +73,8 @@ export default function RegistrationForm() {
             full_name: full_name
         };
 
-        register(dataToSend);
+        register(dataToSend)
+            .then(() => navigate("/login"));
     }
     const getFirstError = () => {
         if (error) {

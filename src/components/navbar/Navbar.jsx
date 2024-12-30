@@ -1,12 +1,15 @@
 import classes from './navbar.module.css';
 import InputButton from "../ui/button/InputButton";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context";
+import MyModal from "../ui/modal/MyModal";
+import CreateLinkForm from "../../pages/CreateLinkForm";
 
-export default function Navbar() {
+export default function Navbar({onNewLink}) {
     const {isAuth, setIsAuth, setToken} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [modal, setModal] = useState(false);
 
     const handleLogout = () => {
         setIsAuth(false);
@@ -14,6 +17,7 @@ export default function Navbar() {
         localStorage.removeItem("auth");
         localStorage.removeItem("token");
     };
+
 
     const handleLoginRedirect = () => {
         navigate("/login");
@@ -23,11 +27,22 @@ export default function Navbar() {
         navigate("/register");
     };
 
+    const handleUserRedirect = () => {
+        navigate("/me");
+    }
+
     return (
         <nav className={classes.nav}>
             <div className={classes.links}>
                 {isAuth ? (
-                    <InputButton onClick={handleLogout}>Logout</InputButton>
+                    <>
+                        <InputButton onClick={handleUserRedirect}>Me</InputButton>
+                        <InputButton onClick={() => setModal(true)}>New Link</InputButton>
+                        <MyModal visible={modal} setVisible={setModal}>
+                            <CreateLinkForm onNewLink={onNewLink}/>
+                        </MyModal>
+                        <InputButton onClick={handleLogout}>Logout</InputButton>
+                    </>
                 ) : (
                     <>
                         <InputButton onClick={handleLoginRedirect}>Login</InputButton>

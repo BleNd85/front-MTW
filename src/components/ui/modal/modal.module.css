@@ -1,0 +1,37 @@
+.MyModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+.MyModal.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.MyModalContent {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.3rem;
+    min-width: 250px;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease-in-out;
+    height: 50%;
+    width: 50%;
+}
+
+.MyModal.show .MyModalContent {
+    transform: translateY(0);
+}

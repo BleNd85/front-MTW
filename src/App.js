@@ -10,6 +10,8 @@ function App() {
     const [isAuth, setIsAuth] = useState(false);
     const [token, setToken] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [refreshUrls, setRefreshUrls] = useState(() => () => {
+    });
 
     useEffect(() => {
         if (localStorage.getItem("auth")) {
@@ -24,12 +26,13 @@ function App() {
             isAuth, setIsAuth,
             token, setToken,
             isLoading, setIsLoading,
+            refreshUrls, setRefreshUrls
         }}>
             {isLoading ? (
                 <div><Loader/></div>
             ) : (
                 <BrowserRouter>
-                    <Navbar/>
+                    <Navbar onNewLink={refreshUrls}/>
                     <AppRouter/>
                 </BrowserRouter>
             )}

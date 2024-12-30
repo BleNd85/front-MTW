@@ -1,6 +1,6 @@
 .form {
     width: 30%;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(0.1rem);
     box-shadow: 0 0 0.4rem 0.1rem rgba(0, 0, 0, 0.1);
     padding: 2rem;
@@ -17,10 +17,25 @@
     margin-bottom: 1rem;
 }
 
+.linksCard {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(0.1rem);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.4rem 0.2rem rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 2rem;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding: 2rem;
+}
+
 .userCard {
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(0.1rem);
     border-radius: 0.5rem;
     box-shadow: 0 0 0.4rem 0.2rem rgba(0, 0, 0, 0.1);
     width: 50%;
@@ -30,14 +45,16 @@
     padding: 1.5rem;
 }
 
-.infoCard{
+.infoCard {
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(0.1rem);
     border-radius: 0.5rem;
     box-shadow: 0 0 0.4rem 0.2rem rgba(0, 0, 0, 0.1);
     width: 70%;
     margin: 2rem;
+    align-content: space-around;
     flex-wrap: wrap;
     align-items: center;
     padding: 1.5rem;
@@ -48,11 +65,88 @@
     margin: 1rem;
 }
 
-.userPage{
+.userPage {
     display: flex;
     align-items: center;
     flex-direction: column;
     background-image: linear-gradient(to bottom right, rgba(243, 0, 0, 0.24), rgba(189, 236, 252, 0.75));
     min-height: calc(100vh - 4rem);
     min-width: 100vw;
+}
+
+.linkButton {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+    text-underline-style: none;
+}
+
+.linkTextContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+
+.linkUrl {
+    max-width: 90%;
+    color: black;
+    text-decoration: none;
+}
+
+.linkEnd {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 0.5rem;
+    width: 40%;
+}
+
+.linkButton a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    display: block;
+}
+
+.linkForm {
+    color: black;
+    text-decoration: none;
+}
+
+.linkFormBody {
+    color: black;
+    text-decoration: none;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.linkFormBodyElement {
+    margin-bottom: 1rem;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 20%;
+}
+
+.pageNumber {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.buttonContainer {
+    display: flex;
+    align-content: center;
+    justify-self: center;
+    gap: 0.5rem;
+    width: 30%;
 }

@@ -1,52 +1,72 @@
 import useFetchUser from "../components/hooks/useFetchUser";
 import classes from "./style.module.css";
 import Loader from "../components/ui/loader/Loader";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import useFetching from "../components/hooks/useFetching";
 import URLService from "../api/URLService";
+import {useNavigate} from "react-router-dom";
+import UserInfo from "../components/UserInfo";
+import Pagination from "../components/Pagination";
+import LinkList from "../components/LinkList";
+import {AuthContext} from "../context";
 
 export default function User() {
     const {user, isLoading: userIsLoading, error: userError} = useFetchUser();
+    const [currentPage, setCurrentPage] = useState(1);
     const [urls, setUrl] = useState([]);
-    const [fetchUrls, isLoading, isError] = useFetching(async () => {
-        const data = await URLService.getUrls()
+    const [fetchUrls, isLoading, isError] = useFetching(async (page) => {
+        const data = await URLService.getUrls(page)
         setUrl(data);
     });
+    const {setRefreshUrls} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleRedirect = (short) => {
+        const redirectUrl = `http://localhost:8000/${short}`;
+        window.open(redirectUrl, "_blank");
+    };
 
     useEffect(() => {
         if (user) {
-            fetchUrls();
+            fetchUrls(currentPage);
         }
-    }, [user]);
+        setRefreshUrls(() => fetchUrls);
+    }, [user, currentPage]);
 
-    //todo break into 2 cards
+    const handlePrevious = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
+
+    const handleNext = () => {
+        setCurrentPage((prev) => prev + 1);
+    };
+
+    const isNextDisabled = urls.length < 10;
+
     return (
         <div className={classes.userPage}>
             {userIsLoading || isLoading ? (
                 <Loader/>
             ) : (
-                <div className={classes.userCard}>
+                <>
                     {userError && <p>{userError}</p>}
                     {isError && <p>{isError}</p>}
-                    <h1>User Information</h1>
-                    {user?.full_name}
-                    <h4>Username: {user?.username}</h4>
-                    <p>Links:</p>
-                    {urls.length > 0 ? (
-                        <ul>
-                            {urls.map((url, index) => (
-                                <li key={index}>
-                                    <a href={url.url} target="_blank" rel="noopener noreferrer">{url.short}</a>
-                                    <p>Redirects: {url.redirects}</p>
-                                    <p>Created At: {new Date(url.created_at).toLocaleString()}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>No links available</p>
-                    )}
-                </div>
+                    <UserInfo user={user}/>
+                </>
             )}
+            {urls.length > 0 && (
+                <div className={classes.linksCard}>
+                    <Pagination
+                        currentPage={currentPage}
+                        onNext={handleNext}
+                        onPrevious={handlePrevious}
+                        isNextDisabled={isNextDisabled}/>
+                    <LinkList
+                        onNavigate={navigate}
+                        onRedirect={handleRedirect}
+                        urls={urls}
+                        onNewLink={() => fetchUrls(currentPage)}/>
+                </div>)}
         </div>
     );
 }
